@@ -1,2 +1,2 @@
 #pattern  filter=crypt diff=crypt
-base/pillar/* filter=crypt diff=crypt
+pillar/* filter=crypt diff=crypt
