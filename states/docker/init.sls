@@ -9,3 +9,9 @@ docker_repo:
     - key_url: https://download.docker.com/linux/debian/gpg
     - file: /etc/apt/sources.list.d/docker.list
 
+
+docker-ce:
+  pkg.installed:
+    - version: latest
+    - require:
+      - pkgrepo: docker_repo
