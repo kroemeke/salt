@@ -1,5 +1,6 @@
-pkg.latest:
-  - pkgs:
-    - rsync
-    - atop
-    - curl
+base:
+  pkg.latest:
+    - pkgs:
+      - rsync
+      - atop
+      - curl
