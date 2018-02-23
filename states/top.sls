@@ -1,3 +1,5 @@
 base:
   '*':
     - tools
+  'dft':
+    - docker
