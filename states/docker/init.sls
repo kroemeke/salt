@@ -15,3 +15,12 @@ docker-ce:
     - version: latest
     - require:
       - pkgrepo: docker_repo
+  service.running:
+    - require:
+      - pkg: docker-ce
+    - name: docker
+    - watch:
+      - pkg: docker-ce
+    - enable: True
+    - reload: True
+
