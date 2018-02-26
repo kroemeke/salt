@@ -4,3 +4,4 @@ base:
       - rsync
       - atop
       - curl
+      - tcpdump
