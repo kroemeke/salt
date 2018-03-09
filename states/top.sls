@@ -4,3 +4,4 @@ base:
   'dft':
     - docker
     - oscam
+    - prometheus.node-exporter
