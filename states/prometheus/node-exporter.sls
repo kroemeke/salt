@@ -10,7 +10,7 @@ prometheus-node-exporter:
     - reload: true
   file.managed:
     - name: /etc/default/prometheus-node-exporter
-    - source: salt://prometheus/prometheus-node-exporter.jinja
+    - source: salt://prometheus/templates/prometheus-node-exporter.jinja
     - user: root
     - group: root
     - mode: 400
