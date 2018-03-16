@@ -1,0 +1,16 @@
+[Unit]
+Description=prometheus
+Wants=docker.service
+After=docker.service
+
+[Service]
+ExecStopPost=-/usr/bin/docker stop -t 10 prometheus
+ExecStartPre=/usr/bin/docker version
+ExecStartPre=-/usr/bin/docker rm -f prometheus
+ExecStart=/usr/bin/docker run --log-driver=journald --log-opt tag=prometheus --name prometheus --memory 256m -p 0.0.0.0:9090:9090  prom/prometheus
+Restart=always
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
