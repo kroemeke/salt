@@ -26,3 +26,4 @@ oscam.servers:
     - mode: 400
     - source: salt://oscam/templates/oscam.servers.jinja
     - makedirs: True
+    - template: jinja
