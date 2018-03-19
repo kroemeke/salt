@@ -15,15 +15,15 @@ oscam:
   service.running:
     - require: 
       - file: /etc/systemd/system/oscam.service
-      - file: /etc/oscam/oscam.servers
+      - file: /etc/oscam/oscam.server
     - enable: True
 
 oscam.servers:
   file.managed:
-    - name: /etc/oscam/oscam.servers
+    - name: /etc/oscam/oscam.server
     - user: root
     - group: root
     - mode: 400
-    - source: salt://oscam/templates/oscam.servers.jinja
+    - source: salt://oscam/templates/oscam.server.jinja
     - makedirs: True
     - template: jinja
