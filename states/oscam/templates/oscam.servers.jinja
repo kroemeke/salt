@@ -1,4 +1,4 @@
-{%- for upstream in pillar.oscam.servers %}
+{%- for upstream in pillar.oscam %}
 [reader]
 label                         = {{ upstream.hostname }} 
 protocol                      = cccam_mcs
