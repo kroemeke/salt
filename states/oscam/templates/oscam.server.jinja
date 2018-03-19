@@ -1,0 +1,16 @@
+{%- for upstream in pillar.oscam.servers %}
+[reader]
+label                         = {{ upstream.hostname }} 
+protocol                      = cccam_mcs
+device                        = {{ upstream.hostname }},{{ upstream.port }}
+user                          = {{ upstream.user }}
+password                      = {{ upstream.pass }}
+inactivitytimeout             = 30
+group                         = 1
+emmcache                      = 1,3,2,0
+cccversion                    = 2.1.4
+cccmaxhops                    = 1
+ccckeepalive                  = 1
+cccreshare                    = 1
+fallback                      = 1
+{%- endfor %}
