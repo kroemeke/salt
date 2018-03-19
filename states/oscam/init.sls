@@ -25,3 +25,4 @@ oscam.servers:
     - group: root
     - mode: 400
     - source: salt://oscam/templates/oscam.servers.jinja
+    - makedirs: True
