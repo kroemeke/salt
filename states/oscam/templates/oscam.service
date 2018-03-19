@@ -7,7 +7,7 @@ After=docker.service
 ExecStopPost=-/usr/bin/docker stop -t 10 oscam
 ExecStartPre=/usr/bin/docker version
 ExecStartPre=-/usr/bin/docker rm -f oscam
-ExecStart=/usr/bin/docker run --log-driver=journald --log-opt tag=oscam --name oscam --memory 32m -p 0.0.0.0:18501:18501 -p 0.0.0.0:18500:18500 -v /etc/oscam/oscam.server:/etc/oscam/server:ro oscam
+ExecStart=/usr/bin/docker run --log-driver=journald --log-opt tag=oscam --name oscam --memory 32m -p 0.0.0.0:18501:18501 -p 0.0.0.0:18500:18500 -v /etc/oscam/oscam.server:/etc/oscam/oscam.server oscam
 Restart=always
 StandardOutput=journal
 StandardError=journal
