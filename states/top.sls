@@ -6,3 +6,4 @@ base:
     - oscam
     - prometheus
     - prometheus.node-exporter
+    - nginx

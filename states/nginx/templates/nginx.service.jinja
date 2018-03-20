@@ -1,0 +1,16 @@
+[Unit]
+Description=nginx
+Wants=docker.service
+After=docker.service
+
+[Service]
+ExecStopPost=-/usr/bin/docker stop -t 10 nginx
+ExecStartPre=/usr/bin/docker version
+ExecStartPre=-/usr/bin/docker rm -f nginx
+ExecStart=/usr/bin/docker run --log-driver=journald --log-opt tag=nginx --name nginx --memory 256m -p 0.0.0.0:9090:9090  nginx:alpine
+Restart=always
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
