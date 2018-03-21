@@ -24,6 +24,6 @@ nginx:
       - service: nginx
     - context:
       server_name: {{ vhost }}
-      port: {{ vhost }}.port
-      address: {{ vhost }}.address
+      port: {{ vhost.port }}
+      address: {{ vhost.address }}
 {%- endfor %}
