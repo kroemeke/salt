@@ -9,3 +9,18 @@ nginx:
     - require: 
       - file: /etc/systemd/system/nginx.service
     - enable: True
+
+{%- for vhost in pillar.nginx.vhosts %}
+{{ vhost }}:
+  file.managed:
+    - name: /etc/nginx/conf.d/{{ vhost }}.conf
+    - user: root
+    - group: root
+    - mode: 444
+    - source: salt://nginx/templates/vhost.jinja
+    - template: jinja
+    - context:
+      server_name: {{ vhost }}
+      port: {{ vhost }}.port
+      address: {{ vhost }}.address
+{%- endfor %}
