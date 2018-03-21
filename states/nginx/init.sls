@@ -19,6 +19,7 @@ nginx:
     - mode: 444
     - source: salt://nginx/templates/vhost.jinja
     - template: jinja
+    - makedirs: true
     - context:
       server_name: {{ vhost }}
       port: {{ vhost }}.port
