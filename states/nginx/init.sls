@@ -20,6 +20,8 @@ nginx:
     - source: salt://nginx/templates/vhost.jinja
     - template: jinja
     - makedirs: true
+    - require_in:
+      - service: nginx
     - context:
       server_name: {{ vhost }}
       port: {{ vhost }}.port
