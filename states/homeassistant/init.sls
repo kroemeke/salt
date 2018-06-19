@@ -20,9 +20,17 @@ homeassistant:
     - source: salt://homeassistant/templates/homeassistant.service
   service.running:
     - require:
-      - file: /etc/systemd/system/homeassistant.service
+      - file: ha-service-file
       - cmd: venv_run_hass
     - enable: True
+
+ha-service-file:
+  file.managed:
+    - name: /etc/systemd/system/homeassistant.service
+    - user: root
+    - group: root
+    - mode: 400
+    - source: salt://homeassistant/templates/homeassistant.service
 
 venv:
   cmd.run:
