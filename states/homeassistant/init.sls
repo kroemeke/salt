@@ -1,6 +1,6 @@
 groups:
-  admin:
-    gid: 6010
+  homeassistant:
+    gid: 5000
 
 users:
   homeassistant:
