@@ -5,3 +5,4 @@ base:
       - atop
       - curl
       - tcpdump
+      - screen
