@@ -23,6 +23,7 @@ homeassistant:
       - file: configuration.yaml
       - file: automations.yaml
       - file: nest.conf
+      - file: tradfri.conf
       - file: ha-service-file
 
 ha-service-file:
@@ -85,6 +86,15 @@ nest.conf:
   file.managed:
     - name: /home/homeassistant/.homeassistant/nest.conf
     - contents_pillar: homeassistant:nest:auth
+    - user: homeassistant
+    - group: homeassistant
+    - require:
+      - venv_run_hass
+
+tradfri.conf:
+  file.managed:
+    - name: /home/homeassistant/.homeassistant/.tradfri_psk.conf
+    - contents_pillar: homeassistant:tradfri
     - user: homeassistant
     - group: homeassistant
     - require:
