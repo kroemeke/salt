@@ -1,0 +1,197 @@
+homeassistant:
+  name: Home
+  latitude: {{ pillar.homeassistant.locations.home.lat }}
+  longitude: {{ pillar.homeassistant.locations.home.lon }}
+  elevation: 19
+  unit_system: metric
+  time_zone: Europe/London
+  customize: !include customize.yaml
+
+
+zone:
+        - name: Home
+          latitude: {{ pillar.homeassistant.locations.home.lat }}
+          longitude: {{ pillar.homeassistant.locations.home.lon }}
+          icon: mdi:home
+          radius: 40
+        - name: Marek Work
+          latitude: {{ pillar.homeassistant.locations.work_m.lat }}
+          longitude: {{ pillar.homeassistant.locations.work_m.lon }}
+          icon: mdi:worker
+          radius: 60
+        - name: Aga Work
+          latitude: {{ pillar.homeassistant.locations.work_a.lat }}
+          longitude: {{ pillar.homeassistant.locations.work_a.lon }}
+          icon: mdi:worker
+          radius: 60
+        - name: Richmond Station
+          latitude: 51.463
+          longitude: -0.301
+          radius: 200
+          icon: mdi:train
+        - name: Waterloo Station
+          latitude: 51.503
+          longitude: -0.113
+          radius: 100
+          icon: mdi:train
+        - name: Feltham Station
+          latitude: 51.448
+          longitude: -0.409
+          radius: 100
+          icon: mdi:train
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+device_tracker:
+  - platform: owntracks
+  - platform: nmap_tracker
+    hosts: {{ pillar.homeassistant.nmap.hosts }}
+  - platform: unifi_direct
+    host: {{ pillar.homeassistant.unify.ip }}
+    username: {{ pillar.homeassistant.unify.username }}
+    password: {{ pillar.homeassistant.unify.password }} 
+
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor:
+  - platform: yr
+  - platform: darksky
+    api_key: {{ pillar.homeassistant.darksky.apikey }} 
+    monitored_conditions:
+      - summary
+      - icon
+      - nearest_storm_distance 
+
+
+binary_sensor:
+  - platform: hikvision
+    host: {{ pillar.homeassistant.hikvision.front.ip }}
+    username: {{ pillar.homeassistant.hikvision.front.username }}
+    password: {{ pillar.homeassistant.hikvision.front.password }} 
+  - platform: mqtt
+    name: "PIR Hall"
+    device_class: "motion"
+    state_topic: "dupa/relay/0"
+    payload_on: 1
+    payload_off: 0
+  - platform: mqtt
+    name: "PIR Living room"
+    device_class: "motion"
+    state_topic: "dupa/relay/1"
+    payload_on: 1
+    payload_off: 0
+  - platform: mqtt
+    name: "PIR Kitchen"
+    state_topic: "dupa/relay/2"
+    device_class: "motion"
+    payload_on: 1
+    payload_off: 0
+  - platform: mqtt
+    name: "Door UNKNOWN"
+    state_topic: "dupa/relay/3"
+    device_class: "door"
+    payload_on: 1
+    payload_off: 0
+  - platform: mqtt
+    name: "Door Porch Internal"
+    state_topic: "dupa/relay/4"
+    device_class: "door"
+    payload_on: 1
+    payload_off: 0
+  - platform: mqtt
+    name: "Door Porch External"
+    state_topic: "dupa/relay/5"
+    device_class: "door"
+    payload_on: 1
+    payload_off: 0
+  - platform: mqtt
+    name: "Door Garden"
+    state_topic: "dupa/relay/6"
+    device_class: "door"
+    payload_on: 1
+    payload_off: 0
+
+switch:
+  - platform: mqtt
+    name: "Bedroom Switch"
+    state_topic: "dupa/x/relay/0"
+    command_topic: "dupa/x/relay/0/set"
+    payload_on: 1
+    payload_off: 0
+    optimistic: false
+    qos: 0
+    retain: true
+
+# Text to speech
+tts:
+  - platform: google
+
+mqtt:
+  broker: {{ pillar.homeassistant.mqtt.ip }}
+  username: {{ pillar.homeassistant.mqtt.username }} 
+  password: {{ pillar.homeassistant.mqtt.password }}
+  discovery: false
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'
+
+
+
+media_player:
+  - platform: samsungtv
+    host: {{ pillar.homeassistant.media_player.samsungtv.ip }}
+    port: 8001
+    timeout: 60
+
+
+nest:
+  client_id: {{ pillar.homeassistant.nest.client_id }}
+  client_secret: {{ pillar.homeassistant.nest.client_secret }}
+
+
+# Cloud
+cloud:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml

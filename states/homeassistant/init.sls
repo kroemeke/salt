@@ -21,6 +21,8 @@ homeassistant:
   service.running:
     - require:
       - file: ha-service-file
+      - file: configuration.yaml
+      - file: automations.yaml
       - cmd: venv_run_hass
     - enable: True
 
@@ -70,3 +72,21 @@ venv_run_hass:
     - runas: homeassistant
 
 
+configuration.yaml:
+  file.managed:
+    - name: /home/homeassistant/.homeassistant/configuration.yaml
+    - template: jinja
+    - user: homeassistant
+    - group: homeassistant
+    - source: salt://homeassistant/templates/configuration.yaml
+    - require:
+      - venv_run_hass
+
+automations.yaml:
+  file.managed:
+    - name: /home/homeassistant/.homeassistant/automations.yaml
+    - user: homeassistant
+    - group: homeassistant
+    - source: salt://homeassistant/templates/configuration.yaml
+    - require:
+      - venv_run_hass

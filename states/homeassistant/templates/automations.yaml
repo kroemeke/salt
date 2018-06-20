@@ -1,0 +1,105 @@
+- action:
+  - service: light.turn_on
+    entity_id: light.porch2
+    data:
+      brightness: 255
+  - delay: '15'
+  - service: light.turn_on
+    entity_id: light.porch2
+    data:
+      brightness: 25
+  - delay: '60'
+  - service: light.turn_off
+    entity_id: light.porch2
+  alias: Porch External On
+  condition: []
+  id: '1518188685080'
+  trigger:
+  - entity_id: binary_sensor.door_porch_external
+    platform: state
+    to: 'on'
+- action:
+  - entity_id: light.tradfri_bulb_gu10_w_400lm_3
+    service: light.turn_on
+    data:
+      brightness: 1
+  - entity_id: light.tradfri_bulb_gu10_w_400lm_7
+    service: light.turn_on
+    data:
+      brightness: 1
+  - delay: '120'
+  - entity_id: light.tradfri_bulb_gu10_w_400lm_3
+    service: light.turn_off
+  - entity_id: light.tradfri_bulb_gu10_w_400lm_7
+    service: light.turn_off
+  alias: Hall Lights On
+  condition: []
+  id: '1518188906782'
+  trigger:
+  - entity_id: binary_sensor.pir_hall
+    platform: state
+    to: 'on'
+- action:
+  - service: light.turn_on
+    entity_id: light.tradfri_bulb_e27_cws_opal_600lm
+    data:
+      brightness: 255
+  alias: Living Lights ON
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  id: '1518199335761'
+  trigger:
+  - entity_id: binary_sensor.pir_living_room
+    platform: state
+    to: 'on'
+- action:
+  - entity_id: switch.bedroom_switch
+    service: switch.turn_on
+  - entity_id: light.porch2
+    service: light.turn_on
+  - delay: 10
+  - entity_id: light.porch2
+    service: light.turn_off
+  - delay: '180'
+  - entity_id: switch.bedroom_switch
+    service: switch.turn_off
+  alias: Front Camera Lights ON
+  condition:
+  - after: '23:30'
+    before: '7:00'
+    condition: time
+  id: '1518200269626'
+  trigger:
+  - entity_id: binary_sensor.ip_camera_motion
+    platform: state
+    to: 'on'
+- action:
+  - service: light.turn_off
+    entity_id: light.porch2
+  alias: Front Camera Lights Off
+  condition: []
+  id: '1518201031915'
+  trigger:
+  - entity_id: binary_sensor.ip_camera_motion
+    for:
+      minutes: 2
+    platform: state
+    to: 'off'
+- action:
+  - service: light.turn_on
+    entity_id: light.porch2
+  - delay: 300
+  - service: light.turn_off
+    entity_id: light.porch2
+  alias: Porch Internal On
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  id: '1518211281081'
+  trigger:
+  - entity_id: binary_sensor.door_porch_internal
+    platform: state
+    to: 'on'
