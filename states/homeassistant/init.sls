@@ -1,3 +1,6 @@
+include:
+  - homeassistant.mqtt
+
 homeassistant:
   group.present:
     - gid: 5000
