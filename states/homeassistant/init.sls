@@ -87,6 +87,6 @@ automations.yaml:
     - name: /home/homeassistant/.homeassistant/automations.yaml
     - user: homeassistant
     - group: homeassistant
-    - source: salt://homeassistant/templates/configuration.yaml
+    - source: salt://homeassistant/templates/automations.yaml
     - require:
       - venv_run_hass
