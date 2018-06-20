@@ -1,5 +1,5 @@
-mosquitto:
-  - pkg.latest:
+mqtt:
+  pkg.latest:
     - pkgs:
       - mosquitto
       - mosquitto-clients
