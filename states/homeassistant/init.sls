@@ -12,12 +12,6 @@ homeassistant:
     - name: /srv/homeassistant
   pkg.latest:
     - name: python3-venv
-  file.managed:
-    - name: /etc/systemd/system/homeassistant.service
-    - user: root
-    - group: root
-    - mode: 400
-    - source: salt://homeassistant/templates/homeassistant.service
   service.running:
     - require:
       - file: ha-service-file
