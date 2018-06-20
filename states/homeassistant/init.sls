@@ -19,6 +19,11 @@ homeassistant:
       - file: automations.yaml
       - cmd: venv_run_hass
     - enable: True
+    - watch:
+      - file: configuration.yaml
+      - file: automations.yaml
+      - file: nest.conf
+      - file: ha-service-file
 
 ha-service-file:
   file.managed:
@@ -73,6 +78,15 @@ configuration.yaml:
     - user: homeassistant
     - group: homeassistant
     - source: salt://homeassistant/templates/configuration.yaml
+    - require:
+      - venv_run_hass
+
+nest.conf:
+  file.managed:
+    - name: /home/homeassistant/.homeassistant/nest.conf
+    - contents_pillar: homeassistant:nest:auth
+    - user: homeassistant
+    - group: homeassistant
     - require:
       - venv_run_hass
 
