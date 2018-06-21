@@ -1,14 +1,13 @@
-mqtt:
-  pkg.latest:
-    - pkgs:
-      - mosquitto
-      - mosquitto-clients
+mosquitto:
+  pkg.installed:
+    - version: latest
   service.running:
     - require:
       - pkg: mosquitto
     - watch:
       - file: /etc/mosquitto/mosquitto.conf
       - file: /etc/mosquitto/mosquitto_pass.conf
+      - pkg: mosquitto
 
 /etc/mosquitto/mosquitto.conf:
   file.managed:
@@ -30,5 +29,3 @@ mqtt:
     - template: jinja
     - require:
       - pkg: mosquitto
-
-
