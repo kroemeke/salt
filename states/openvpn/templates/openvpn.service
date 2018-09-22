@@ -1,0 +1,16 @@
+[Unit]
+Description=openvpn
+Wants=docker.service
+After=docker.service
+
+[Service]
+ExecStopPost=-/usr/bin/docker stop -t 10 openvpn
+ExecStartPre=/usr/bin/docker version
+ExecStartPre=-/usr/bin/docker rm -f openvpn
+ExecStart=/usr/bin/docker run --log-driver=journald --log-opt tag=openvpn --name openvpn --memory 32m -p 0.0.0.0:1194:1194 --cap-add NET_ADMIN openvpn
+Restart=always
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
