@@ -188,6 +188,22 @@ nest:
   client_id: {{ pillar.homeassistant.nest.client_id }}
   client_secret: {{ pillar.homeassistant.nest.client_secret }}
 
+#camera:
+#  - platform: generic
+#    name: {{ pillar.homeassistant.camera.generic[0] }} 
+#    still_image_url: https://127.0.0.1:8123/local/your_image.png
+#    verify_ssl: false
+#  - platform: generic
+#    name: Some Image
+#    still_image_url: https://127.0.0.1:8123/local/your_image.png
+#    verify_ssl: false
+#  - platform: generic
+#    name: Some Image
+#    still_image_url: https://127.0.0.1:8123/local/your_image.png
+#    verify_ssl: false
+
+
+
 
 # Cloud
 cloud:
@@ -195,3 +211,6 @@ cloud:
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+
+tradfri:
+  host: 10.0.1.35
