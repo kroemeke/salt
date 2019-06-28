@@ -103,6 +103,20 @@ tradfri.conf:
     - require:
       - venv_run_hass
 
+pip3:
+  pkg.latest
+    - name: pip3
+
+pytradfri:
+  cmd.run:
+    - name: pip3 install pytradfri 
+    - cwd: /srv/homeassistant
+    - require:
+      - pkg: pip3
+    - creates: /usr/local/lib/python3.5/dist-packages/pytradfri/__init__.py 
+    - runas: root
+
+
 automations.yaml:
   file.managed:
     - name: /home/homeassistant/.homeassistant/automations.yaml
