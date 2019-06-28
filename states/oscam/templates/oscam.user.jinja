@@ -1,0 +1,8 @@
+{%- for user, password in pillar.oscam_users.iteritems() %}
+[account]
+user                          = {{ user }}
+pwd                           = {{ password }}
+description                   = {{ user }}
+group                         = 1
+max_connections               = 2
+{%- endfor %}
