@@ -16,6 +16,7 @@ oscam:
     - require: 
       - file: /etc/systemd/system/oscam.service
       - file: /etc/oscam/oscam.server
+      - file: /etc/oscam/oscam.user
     - enable: True
 
 oscam.servers:
@@ -27,3 +28,14 @@ oscam.servers:
     - source: salt://oscam/templates/oscam.server.jinja
     - makedirs: True
     - template: jinja
+
+oscam.user:
+  file.managed:
+    - name: /etc/oscam/oscam.user
+    - user: root
+    - group: root
+    - mode: 400
+    - source: salt://oscam/templates/oscam.user.jinja
+    - makedirs: True
+    - template: jinja
+
