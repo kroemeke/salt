@@ -24,7 +24,7 @@ oscam.servers:
     - name: /etc/oscam/oscam.server
     - user: root
     - group: root
-    - mode: 400
+    - mode: 444
     - source: salt://oscam/templates/oscam.server.jinja
     - makedirs: True
     - template: jinja
@@ -34,7 +34,7 @@ oscam.user:
     - name: /etc/oscam/oscam.user
     - user: root
     - group: root
-    - mode: 400
+    - mode: 444
     - source: salt://oscam/templates/oscam.user.jinja
     - makedirs: True
     - template: jinja
